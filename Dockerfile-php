@@ -1,0 +1,48 @@
+# app_php
+FROM php:8.2-fpm
+
+RUN apt-get update && apt-get install -y
+
+RUN apt-get install -y --no-install-recommends \
+        git \
+        zlib1g-dev \
+        libxml2-dev \
+        libzip-dev \
+        libpq-dev \
+        libfreetype6-dev \
+        libjpeg62-turbo-dev \
+        libpng-dev \
+        libxslt1-dev \
+        nano \
+    && docker-php-ext-install \
+        zip \
+        intl \
+        pdo \
+        mysqli \
+        pdo_mysql \
+        opcache \
+	xsl
+
+# Install GD
+RUN docker-php-ext-configure gd --with-jpeg --with-freetype
+#    --enable-gd-native-ttf
+
+RUN docker-php-ext-install -j$(nproc) gd
+#RUN docker-php-ext-enable gd
+
+# Install Composer !
+RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+RUN php -r "if (hash_file('sha384', 'composer-setup.php') === '55ce33d7678c5a611085589f1f3ddf8b3c52d662cd01d4ba75c0ee0459970c2200a51f492d557530c71c15d8dba01eae') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
+RUN php composer-setup.php
+RUN php -r "unlink('composer-setup.php');"
+RUN mv composer.phar /usr/local/bin/composer
+
+# Install Symfony
+RUN curl -1sLf 'https://dl.cloudsmith.io/public/symfony/stable/setup.deb.sh' | bash
+RUN apt install symfony-cli
+
+# Set the default directory inside the container
+WORKDIR /var/www/symfony
+
+RUN chmod 755 /var/www/symfony
+RUN chown www-data:www-data /var/www/symfony
