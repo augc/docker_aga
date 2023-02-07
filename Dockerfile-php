@@ -23,6 +23,9 @@ RUN apt-get install -y --no-install-recommends \
         opcache \
 	xsl
 
+RUN docker-php-ext-configure pgsql -with-pgsql=/usr/local/pgsql \
+    && docker-php-ext-install pgsql pdo_pgsql
+
 # Install GD
 RUN docker-php-ext-configure gd --with-jpeg --with-freetype
 #    --enable-gd-native-ttf
