@@ -20,6 +20,7 @@ services:
     environment:
       # Run "composer require symfony/orm-pack" to install and configure Doctrine ORM
       DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@${POSTGRES_HOST}:5432/${POSTGRES_DB}?serverVersion=${POSTGRES_VERSION:-14}
+    command: git config --global user.email "${GITHUB_USER_EMAIL}" && git config --global user.name "${GITHUB_USER_NAME}"
     networks:
       symfony_net:
         ipv4_address: 172.20.0.2
