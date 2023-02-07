@@ -82,7 +82,7 @@ Docker-compose crea una red interna con IP fijas para los 4 contenedores:
         
 Es importante que las IP sean fijas para evitar tener que modificar el archivo de configuración con los datos de conexión a la base de datos.
 
-## Preparando tu entorno de Symfony 5:
+## Preparando tu entorno de Symfony 6:
 
 Si todo ha ido bien tendremos a los cuatro contenedores funcionando:
 
@@ -107,15 +107,15 @@ Configurar los datos del usuario que vayas a utilizar y tenga permisos de edici�
 
 Clonamos
 
-        root@2ea7bc4565fc:/var/www/symfony# git clone https://github.com/augc/aga.git
+        root@3fa9b676624c:/var/www/symfony# git clone https://github.com/augc/aga.git augc_aga
         
 Accede al directorio
 
-        root@2ea7bc4565fc:/var/www/symfony# cd aga
+        root@3fa9b676624c:/var/www/symfony# cd augc_aga
 
 Instala las dependencias
 
-        root@2ea7bc4565fc:/var/www/symfony/aga# composer install (o composer install --no-dev --optimize-autoloader si estás en producción)
+        root@3fa9b676624c:/var/www/symfony/augc_aga# composer install (o composer install --no-dev --optimize-autoloader si estás en producción)
 
 # Fin
 
