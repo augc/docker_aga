@@ -2,16 +2,18 @@ version: "3.4"
 
 services:
   php:
+    container_name: ${APP_NAME}_php
     build:
       context: .
       dockerfile: Dockerfile-php
       args:
         SYMFONY_VERSION: ${SYMFONY_VERSION:-}
         STABILITY: ${STABILITY:-stable}
-    container_name: ${APP_NAME}_php
+        GITHUB_USER_NAME: ${GITHUB_USER_NAME:-}
+        GITHUB_USER_EMAIL: ${GITHUB_USER_EMAIL:-}
     restart: unless-stopped
     volumes:
-      - php_socket:/var/www/symfony
+      - "./php_socket:/var/www/symfony"
     healthcheck:
       interval: 10s
       timeout: 3s
@@ -20,7 +22,6 @@ services:
     environment:
       # Run "composer require symfony/orm-pack" to install and configure Doctrine ORM
       DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@${POSTGRES_HOST}:5432/${POSTGRES_DB}?serverVersion=${POSTGRES_VERSION:-14}
-    command: git config --global user.email "${GITHUB_USER_EMAIL}" && git config --global user.name "${GITHUB_USER_NAME}"
     networks:
       symfony_net:
         ipv4_address: 172.20.0.2
@@ -36,7 +37,7 @@ services:
       - 4444:80
       - 4443:443
     volumes:
-      - php_socket:/var/www/symfony
+      - "/php_socket:/var/www/symfony"
     networks:
       symfony_net:
         ipv4_address: 172.20.0.3
@@ -50,8 +51,8 @@ networks:
 
 volumes:
   php_socket:
-    driver: local
-    driver_opts:
-      type: 'none'
-      o: 'bind'
-      device: ${PATH_TO_PROJECT}/php_socket
+#    driver: local
+#    driver_opts:
+#      type: 'none'
+#      o: 'bind'
+#      device: ${PATH_TO_PROJECT}/php_socket
