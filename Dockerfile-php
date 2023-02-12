@@ -43,6 +43,7 @@ RUN mv composer.phar /usr/local/bin/composer
 # Install Symfony
 RUN curl -1sLf 'https://dl.cloudsmith.io/public/symfony/stable/setup.deb.sh' | bash
 RUN apt install symfony-cli
+#RUN mv /root/.symfony/bin/symfony /usr/local/bin/symfony
 
 # Set the default directory inside the container
 WORKDIR /var/www/symfony
@@ -51,6 +52,8 @@ RUN chmod 755 /var/www/symfony
 RUN chown www-data:www-data /var/www/symfony
 
 # Github
-RUN git config --global user.email "${GITHUB_USER_EMAIL}"
-RUN git config --global user.name "${GITHUB_USER_NAME}"
+#RUN git config --global user.email "${GITHUB_USER_EMAIL}"
+#RUN git config --global user.name "${GITHUB_USER_NAME}"
+RUN git config --global user.email "davidbermudez@jerez.es"
+RUN git config --global user.name "davidbermudez"
 RUN git config --global credential.helper 'cache --timeout 3600'
