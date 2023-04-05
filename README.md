@@ -108,6 +108,14 @@ Accede al directorio
 
         root@3fa9b676624c:/var/www/symfony# cd augc_aga
 
+Crea un archivo .env.local 
+
+        cp .env .env.local
+
+Añade al archivo .env.local los datos de conexión de la base de datos
+
+        DATABASE_URL: postgresql://POSTGRES_USER:POSTGRES_PASSWORD@POSTGRES_HOST:5432/POSTGRES_DB?serverVersion=POSTGRES_VERSION
+
 Instala las dependencias
 
         root@3fa9b676624c:/var/www/symfony/augc_aga# composer install (o composer install --no-dev --optimize-autoloader si estás en producción)
