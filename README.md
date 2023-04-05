@@ -31,11 +31,6 @@ Renombra el archivo .env_dummy como .env y actualiza las variables de entorno qu
 
         PATH_TO_PROJECT=full-path-to-project-in-local # /home/user/my-project/
         APP_NAME=augc_aga
-        POSTGRES_USER=?
-        POSTGRES_PASSWORD=?
-        POSTGRES_DB=?
-        POSTGRES_HOST=?
-        POSTGRES_VERSION=?
         SYMFONY_VERSION=6.2
         STABILITY=stable
         
