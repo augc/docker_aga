@@ -33,7 +33,13 @@ Renombra el archivo .env_dummy como .env y actualiza las variables de entorno qu
         APP_NAME=augc_aga
         SYMFONY_VERSION=6.2
         STABILITY=stable
-        
+
+### Edita archivos
+
+Edita el archivo build/nginx/default.conf y cambia el valor de root:
+
+        root /var/www/symfony/my-project/public;
+	
 ### Crea los siguientes directorios
 
         mkdir php_socket
@@ -79,7 +85,7 @@ Es importante que las IP sean fijas para evitar tener que modificar el archivo d
 
 ## Preparando tu entorno de Symfony 6:
 
-Si todo ha ido bien tendremos a los cuatro contenedores funcionando:
+Si todo ha ido bien tendremos a los dos contenedores funcionando:
 
         docker ps --format "table {{.ID}}\t{{.Status}}\t{{.Ports}}\t{{.Names}}"
 
